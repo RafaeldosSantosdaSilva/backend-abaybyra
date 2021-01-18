@@ -6,7 +6,8 @@ let connMySQL=function(){
   return connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123',
+   // password: '123',
+    password: 'vertrigo',
     database: 'abaybyra'
   });
 }

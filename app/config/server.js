@@ -1,7 +1,20 @@
 const express = require('express');
 const consign = require('consign');
-
+const bodyParser = require('body-parser'); //depencia que recebe paramentros post
 const app = express();
+const cors = require('cors');
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 
 app.set('view engine', 'ejs');
 app.set('views', '././app/views')
@@ -14,8 +27,8 @@ consign()
 .then('././app/models')
 .into(app)
 
-app.get(/^(.*(?!teste)).*$/, function(req,res){
-  res.render('error');
-}) 
+
+
+
 
 module.exports = app;

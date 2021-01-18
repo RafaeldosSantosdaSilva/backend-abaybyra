@@ -4,10 +4,10 @@ module.exports = (app) => {
     let connection = app.app.config.database();
     let query = app.app.models.modelQueries;
     
-    query.getTeachers(connection,
+      query.getTeachers(connection,
     function(error, results, fields){
       console.log(error,results)
-      res.render('teste2', {dados: results});
+      res.json(results);
     });
   });
 }
