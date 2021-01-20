@@ -1,4 +1,5 @@
 let app = require('./app/config/server');
-app.listen(3005,function(){
+const PORT = process.env.PORT || 3000
+app.listen(PORT,function(){
   console.log("Servidor rodando!");
 });
