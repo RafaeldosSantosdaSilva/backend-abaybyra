@@ -1,5 +1,27 @@
- module.exports = function (app){
- app.post('/add_prof', function (req, res) {
+const {check, validationResult } = require("express-validator");
+
+module.exports = function (app){
+ 
+app.get('/add_prof', function(req, res){
+  res.render('views/index', {validacao:{errors:{},}, dados:{}});
+});
+
+ app.post('/add_prof/salvar',[
+  check('nome', 'Nome é Obrigatótio').notEmpty(),
+  check('email', 'Email é Obrigatório').notEmpty(),
+  check('senha', 'A senha precisa ter no mínimo 8 digitos').isLength({min:8}),
+  check('disciplina', 'Informe a Diciplina').notEmpty(),
+ ], function (req, res) {
+
+  let erros = validationResult(req);
+      
+      if(!erros.isEmpty()){
+      res.render("views/index", {validacao:erros})
+      console.log(erros);
+      return;
+    }
+
+
   let connection = app.app.config.database();
   let query = app.app.models.modelQueries; 
 

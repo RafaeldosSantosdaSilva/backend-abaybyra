@@ -1,6 +1,7 @@
 const express = require('express');
 const consign = require('consign');
 const bodyParser = require('body-parser'); //depencia que recebe paramentros post
+const{check, validationResult} = require('express-validator');
 const app = express();
 const cors = require('cors');
 

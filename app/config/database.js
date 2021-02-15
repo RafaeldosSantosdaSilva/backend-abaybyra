@@ -7,7 +7,7 @@ let connMySQL=function(){
     host: 'localhost',
     user: 'root',
    // password: '123',
-    password: 'vertrigo',
+    password: '',
     database: 'abaybyra'
   });
 }
