@@ -1,4 +1,5 @@
 const {check, validationResult } = require("express-validator");
+const crypto = require('crypto');
 
 module.exports = function (app){
 
@@ -22,7 +23,14 @@ module.exports = function (app){
       check('publica', 'Informe se é publica').notEmpty(),
     ], function (req, res){
 
+      let escola_user
       let erros = validationResult(req);
+
+      let senhaCriptografada = crypto.createHash("md5").update(escola_user.senha).digest("hex");
+
+      escola_user.senha = senhaCriptografada;
+      
+
       
       if(!erros.isEmpty()){
       res.render("views/index", {validacao:erros})

@@ -1,4 +1,5 @@
 const {check, validationResult } = require("express-validator");
+const crypto = require('crypto');
 
 module.exports = function (app){
  
@@ -13,8 +14,15 @@ app.get('/add_prof', function(req, res){
   check('disciplina', 'Informe a Diciplina').notEmpty(),
  ], function (req, res) {
 
+  let prof_user = req.body;
   let erros = validationResult(req);
-      
+  
+  let senhaCriptografada = crypto.createHash("md5").update(prof_user.senha).digest("hex"); 
+  
+  prof_user.senha = senhaCriptografada;
+  
+
+
       if(!erros.isEmpty()){
       res.render("views/index", {validacao:erros})
       console.log(erros);
